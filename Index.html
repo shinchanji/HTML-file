@@ -1,0 +1,59 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animated Banner</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden; /* Prevent scrollbars if animation goes beyond viewport */
+        }
+        #banner-container {
+            width: 100%;
+            height: 200px; /* Example banner height */
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        canvas {
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div id="banner-container">
+        <canvas id="myCanvas" width="800" height="150"></canvas>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('myCanvas');
+        const ctx = canvas.getContext('2d');
+
+        let x = 0;
+        let speed = 2;
+
+        function animate() {
+            // Clear the canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Draw the moving rectangle
+            ctx.fillStyle = 'blue';
+            ctx.fillRect(x, 50, 100, 50); // x, y, width, height
+
+            // Update position
+            x += speed;
+
+            // Reverse direction if hitting boundaries
+            if (x + 100 > canvas.width || x < 0) {
+                speed *= -1;
+            }
+
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+    </script>
+</body>
+</html>
